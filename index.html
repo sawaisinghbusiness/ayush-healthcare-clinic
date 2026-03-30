@@ -1,1 +1,1358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayush Health Care Clinic | Ayurvedic Treatment | Rajkot</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+  :root {
+    --blue: #2F80ED;
+    --green: #27AE60;
+    --gradient: linear-gradient(135deg, #2F80ED, #27AE60);
+    --gradient-rev: linear-gradient(135deg, #27AE60, #2F80ED);
+    --light-bg: #F5F9FF;
+    --white: #FFFFFF;
+    --dark: #1a1a2e;
+    --text: #333333;
+    --text-light: #666;
+    --glass-bg: rgba(255,255,255,0.15);
+    --glass-border: rgba(255,255,255,0.25);
+  }
 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5 { font-family: 'Poppins', sans-serif; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: #f0f0f0; }
+  ::-webkit-scrollbar-thumb { background: var(--gradient); border-radius: 3px; }
+
+  /* ── NAVBAR ── */
+  #navbar {
+    position: fixed; top: 0; width: 100%; z-index: 1000;
+    padding: 14px 0;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 2px 20px rgba(47,128,237,0.12);
+    transition: all 0.3s ease;
+  }
+  #navbar.scrolled {
+    padding: 10px 0;
+    box-shadow: 0 4px 30px rgba(47,128,237,0.18);
+  }
+  .nav-container {
+    max-width: 1200px; margin: 0 auto;
+    padding: 0 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    display: flex; align-items: center; gap: 10px; text-decoration: none;
+  }
+  .logo-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--gradient);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: white;
+  }
+  .logo-text { font-family: 'Poppins', sans-serif; }
+  .logo-text .clinic-name { font-size: 15px; font-weight: 700; color: var(--blue); line-height: 1.2; }
+  .logo-text .clinic-sub { font-size: 10px; color: var(--green); font-weight: 500; letter-spacing: 1px; text-transform: uppercase; }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 6px; list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none; color: var(--text);
+    font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 500;
+    padding: 6px 12px; border-radius: 8px;
+    transition: all 0.3s;
+  }
+  .nav-links a:hover { background: var(--light-bg); color: var(--blue); }
+
+  .btn-book-nav {
+    background: var(--gradient) !important;
+    color: white !important;
+    padding: 8px 18px !important;
+    border-radius: 25px !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 15px rgba(47,128,237,0.3);
+    transition: all 0.3s !important;
+  }
+  .btn-book-nav:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(47,128,237,0.4) !important; background: none !important; }
+
+  /* Hamburger */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    padding: 6px; border-radius: 8px; transition: 0.3s;
+  }
+  .hamburger span {
+    width: 24px; height: 2.5px;
+    background: var(--blue); border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5.5px); }
+  .hamburger.active span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5.5px); }
+
+  .mobile-menu {
+    display: none; position: fixed; top: 72px; left: 0; width: 100%; z-index: 999;
+    background: rgba(255,255,255,0.98); backdrop-filter: blur(20px);
+    padding: 0; max-height: 0; overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.3s ease;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  }
+  .mobile-menu.open { max-height: 500px; padding: 16px 0 24px; }
+  .mobile-menu ul { list-style: none; padding: 0 24px; }
+  .mobile-menu ul li { border-bottom: 1px solid rgba(47,128,237,0.08); }
+  .mobile-menu ul li a {
+    display: block; padding: 14px 0;
+    font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 500;
+    color: var(--text); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .mobile-menu ul li a:hover { color: var(--blue); }
+  .mobile-book-btn {
+    margin: 16px 24px 0;
+    display: block; text-align: center;
+    background: var(--gradient); color: white !important;
+    padding: 14px !important; border-radius: 12px;
+    font-weight: 700 !important; font-size: 15px !important;
+    text-decoration: none;
+    box-shadow: 0 4px 20px rgba(47,128,237,0.3);
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 13px 28px; border-radius: 50px;
+    font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 14px;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .btn-primary {
+    background: var(--gradient); color: white;
+    box-shadow: 0 6px 20px rgba(47,128,237,0.35);
+  }
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(47,128,237,0.45); }
+
+  .btn-whatsapp {
+    background: #25D366; color: white;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.35);
+  }
+  .btn-whatsapp:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(37,211,102,0.45); background: #1ebe5d; }
+
+  .btn-call {
+    background: white; color: var(--blue);
+    border: 2px solid rgba(255,255,255,0.5);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  }
+  .btn-call:hover { transform: translateY(-3px); background: rgba(255,255,255,0.95); }
+
+  .btn-outline-white {
+    background: transparent; color: white;
+    border: 2px solid rgba(255,255,255,0.7);
+  }
+  .btn-outline-white:hover { background: white; color: var(--blue); transform: translateY(-2px); }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 90px 0; }
+  .section-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  .section-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: linear-gradient(135deg, rgba(47,128,237,0.1), rgba(39,174,96,0.1));
+    border: 1px solid rgba(47,128,237,0.2);
+    padding: 6px 16px; border-radius: 50px;
+    font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600;
+    color: var(--blue); letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: clamp(28px, 4vw, 42px); font-weight: 800;
+    color: var(--dark); line-height: 1.2; margin-bottom: 14px;
+  }
+  .section-title span { background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .section-subtitle { font-size: 16px; color: var(--text-light); max-width: 600px; line-height: 1.7; }
+  .text-center { text-align: center; }
+  .text-center .section-subtitle { margin: 0 auto; }
+
+  /* ── GLASS CARD ── */
+  .glass-card {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+
+  /* ── HERO ── */
+  #home {
+    min-height: 100vh;
+    background: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1920&q=80') center/cover no-repeat;
+    position: relative;
+    display: flex; align-items: center;
+    padding-top: 80px;
+  }
+  #home::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,20,50,0.75) 0%, rgba(15,50,30,0.65) 100%);
+  }
+  .hero-container {
+    position: relative; z-index: 1;
+    max-width: 1200px; margin: 0 auto; padding: 60px 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  }
+  .hero-glass {
+    padding: 44px;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 12px; font-weight: 600; color: white;
+    letter-spacing: 1px; text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+  .hero-title {
+    font-size: clamp(26px, 3.5vw, 44px); font-weight: 800;
+    color: white; line-height: 1.2; margin-bottom: 16px;
+  }
+  .hero-title span { background: linear-gradient(135deg, #74b9ff, #55efc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .hero-desc { color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.75; margin-bottom: 28px; }
+  .hero-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+  .hero-points { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero-point {
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+    padding: 5px 12px; border-radius: 20px;
+    font-size: 12px; font-weight: 600; color: white;
+  }
+  .hero-point i { color: #55efc4; font-size: 11px; }
+
+  .hero-right { display: flex; flex-direction: column; gap: 16px; }
+  .stat-card {
+    padding: 22px 26px; display: flex; align-items: center; gap: 16px;
+  }
+  .stat-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    background: var(--gradient);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: white; flex-shrink: 0;
+  }
+  .stat-num { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 800; color: white; line-height: 1; }
+  .stat-label { font-size: 13px; color: rgba(255,255,255,0.8); margin-top: 2px; }
+
+  /* ── TREATMENTS ── */
+  #treatments { background: var(--light-bg); }
+  .treatments-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 22px; margin-top: 50px;
+  }
+  .treatment-card {
+    background: white; border-radius: 18px; padding: 28px 22px;
+    box-shadow: 0 4px 20px rgba(47,128,237,0.08);
+    border: 1px solid rgba(47,128,237,0.08);
+    transition: all 0.35s ease; cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .treatment-card::after {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+    height: 3px; background: var(--gradient);
+    transform: scaleX(0); transition: transform 0.35s ease;
+    transform-origin: left;
+  }
+  .treatment-card:hover { transform: translateY(-8px); box-shadow: 0 16px 40px rgba(47,128,237,0.18); }
+  .treatment-card:hover::after { transform: scaleX(1); }
+  .treatment-icon {
+    width: 56px; height: 56px; border-radius: 14px;
+    background: linear-gradient(135deg, rgba(47,128,237,0.1), rgba(39,174,96,0.1));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 14px;
+    transition: all 0.35s;
+  }
+  .treatment-card:hover .treatment-icon { background: var(--gradient); }
+  .treatment-card:hover .treatment-icon i { filter: brightness(10); }
+  .treatment-name {
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px;
+    color: var(--dark); margin-bottom: 6px;
+  }
+  .treatment-desc { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+  /* ── WEIGHT LOSS ── */
+  #weight-loss {
+    background: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&q=80') center/cover no-repeat;
+    position: relative;
+  }
+  #weight-loss::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(15,40,10,0.82), rgba(10,30,60,0.75));
+  }
+  .weight-loss-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .weight-loss-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .weight-loss-glass { padding: 46px; }
+  .wl-title { font-size: clamp(26px, 3.5vw, 40px); font-weight: 800; color: white; margin-bottom: 16px; line-height: 1.25; }
+  .wl-title span { background: linear-gradient(135deg, #74b9ff, #55efc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .wl-desc { color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.75; margin-bottom: 28px; }
+  .wl-points { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 32px; }
+  .wl-point {
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 14px; border-radius: 10px;
+    font-size: 13px; font-weight: 500; color: white;
+  }
+  .wl-point i { color: #55efc4; font-size: 14px; }
+
+  .wl-stats { display: flex; flex-direction: column; gap: 20px; }
+  .wl-stat-item {
+    padding: 26px; display: flex; gap: 18px; align-items: center;
+  }
+  .wl-stat-circle {
+    width: 70px; height: 70px; border-radius: 50%;
+    background: var(--gradient); color: white;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+  }
+  .wl-stat-circle .num { font-size: 20px; font-weight: 800; line-height: 1; }
+  .wl-stat-circle .unit { font-size: 10px; font-weight: 500; }
+  .wl-stat-body { }
+  .wl-stat-title { font-family: 'Poppins', sans-serif; font-weight: 700; color: white; font-size: 15px; margin-bottom: 4px; }
+  .wl-stat-sub { font-size: 13px; color: rgba(255,255,255,0.7); }
+
+  /* ── RESULTS ── */
+  #results { background: white; }
+  .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 28px; margin-top: 50px; }
+  .result-card {
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    background: white; transition: transform 0.35s ease;
+  }
+  .result-card:hover { transform: translateY(-8px); }
+  .result-images { display: grid; grid-template-columns: 1fr 1fr; height: 200px; }
+  .result-img {
+    background: var(--light-bg);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 40px; position: relative;
+    overflow: hidden;
+  }
+  .result-img:first-child { background: linear-gradient(135deg, #f8d7da, #f5c6cb); }
+  .result-img:last-child { background: linear-gradient(135deg, #d4edda, #c3e6cb); }
+  .result-label {
+    position: absolute; bottom: 6px; left: 0; right: 0;
+    text-align: center; font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 700;
+    padding: 3px 8px;
+  }
+  .result-img:first-child .result-label { color: #721c24; background: rgba(248,215,218,0.9); }
+  .result-img:last-child .result-label { color: #155724; background: rgba(212,237,218,0.9); }
+  .result-body { padding: 20px 22px; }
+  .result-kg { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 800; color: var(--green); }
+  .result-text { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+  .result-stars { color: #f39c12; font-size: 13px; margin-top: 8px; }
+
+  /* ── HAIR FALL / PCOS ── */
+  #pcos-hair {
+    background: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=80') center/cover no-repeat;
+    position: relative;
+  }
+  #pcos-hair::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,20,60,0.82), rgba(30,10,50,0.75));
+  }
+  .pcos-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .pcos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+  .pcos-glass { padding: 40px; }
+  .pcos-title { font-size: clamp(22px, 3vw, 34px); font-weight: 800; color: white; margin-bottom: 12px; }
+  .pcos-title span { background: linear-gradient(135deg, #a29bfe, #fd79a8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .pcos-desc { color: rgba(255,255,255,0.85); font-size: 14px; line-height: 1.75; margin-bottom: 20px; }
+  .pcos-list { list-style: none; margin-bottom: 24px; }
+  .pcos-list li {
+    display: flex; align-items: center; gap: 10px;
+    color: rgba(255,255,255,0.9); font-size: 13.5px; padding: 7px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .pcos-list li i { color: #a29bfe; width: 16px; }
+
+  /* ── WHY CHOOSE ── */
+  #why-us { background: #f8f9fc; }
+  .why-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 22px; margin-top: 50px; }
+  .why-card {
+    background: white; border-radius: 18px; padding: 30px 24px;
+    box-shadow: 0 4px 20px rgba(47,128,237,0.07);
+    border: 1px solid rgba(47,128,237,0.08);
+    transition: all 0.35s; text-align: center;
+  }
+  .why-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(47,128,237,0.15); }
+  .why-icon {
+    width: 64px; height: 64px; border-radius: 50%;
+    background: linear-gradient(135deg, rgba(47,128,237,0.1), rgba(39,174,96,0.12));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin: 0 auto 16px;
+    transition: 0.35s;
+  }
+  .why-card:hover .why-icon { background: var(--gradient); }
+  .why-card:hover .why-icon i { filter: brightness(10); }
+  .why-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px; color: var(--dark); margin-bottom: 6px; }
+  .why-desc { font-size: 13px; color: var(--text-light); line-height: 1.6; }
+
+  /* ── DOCTOR ── */
+  #doctor { background: white; }
+  .doctor-inner { display: grid; grid-template-columns: 1fr 1.5fr; gap: 70px; align-items: center; }
+  .doctor-photo-wrap {
+    position: relative;
+  }
+  .doctor-photo-bg {
+    width: 100%; aspect-ratio: 3/4; border-radius: 24px;
+    background: linear-gradient(135deg, rgba(47,128,237,0.08), rgba(39,174,96,0.1));
+    overflow: hidden; position: relative;
+    box-shadow: 0 20px 60px rgba(47,128,237,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 120px;
+  }
+  .doctor-badge {
+    position: absolute; bottom: -16px; right: -16px;
+    background: var(--gradient); color: white;
+    padding: 16px 20px; border-radius: 16px;
+    font-family: 'Poppins', sans-serif; text-align: center;
+    box-shadow: 0 8px 24px rgba(47,128,237,0.4);
+  }
+  .doctor-badge .badge-num { font-size: 28px; font-weight: 800; line-height: 1; }
+  .doctor-badge .badge-text { font-size: 11px; font-weight: 500; opacity: 0.9; }
+  .doctor-name { font-size: clamp(26px, 3vw, 38px); font-weight: 800; color: var(--dark); margin-bottom: 6px; }
+  .doctor-title { font-size: 14px; color: var(--blue); font-weight: 600; margin-bottom: 6px; }
+  .doctor-quals { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; margin-top: 10px; }
+  .qual-tag {
+    background: linear-gradient(135deg, rgba(47,128,237,0.1), rgba(39,174,96,0.1));
+    border: 1px solid rgba(47,128,237,0.15);
+    padding: 5px 12px; border-radius: 20px;
+    font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; color: var(--blue);
+  }
+  .doctor-desc { font-size: 15px; color: var(--text-light); line-height: 1.8; margin-bottom: 28px; }
+  .doctor-stats { display: flex; gap: 30px; margin-bottom: 28px; }
+  .dstat { text-align: center; }
+  .dstat-num { font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800; background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .dstat-label { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { background: linear-gradient(135deg, rgba(47,128,237,0.05), rgba(39,174,96,0.05)); }
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; margin-top: 50px; }
+  .testi-card {
+    background: white; border-radius: 18px; padding: 30px 26px;
+    box-shadow: 0 6px 24px rgba(47,128,237,0.09);
+    border: 1px solid rgba(47,128,237,0.08);
+    transition: all 0.35s; position: relative;
+  }
+  .testi-card:hover { transform: translateY(-6px); box-shadow: 0 14px 40px rgba(47,128,237,0.15); }
+  .testi-card::before {
+    content: '"'; position: absolute; top: 16px; right: 24px;
+    font-size: 60px; font-family: 'Poppins', sans-serif; font-weight: 900;
+    background: var(--gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    line-height: 1; opacity: 0.3;
+  }
+  .testi-stars { color: #f39c12; font-size: 14px; margin-bottom: 14px; }
+  .testi-text { font-size: 14px; color: var(--text-light); line-height: 1.75; margin-bottom: 20px; font-style: italic; }
+  .testi-author { display: flex; align-items: center; gap: 12px; }
+  .testi-avatar {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--gradient); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 15px;
+  }
+  .testi-name { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 14px; color: var(--dark); }
+  .testi-location { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+  .testi-result { margin-top: 6px; display: inline-block; background: linear-gradient(135deg, rgba(39,174,96,0.1), rgba(47,128,237,0.1)); border: 1px solid rgba(39,174,96,0.2); padding: 2px 10px; border-radius: 10px; font-size: 11px; font-weight: 600; color: var(--green); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: url('https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1920&q=80') center/cover no-repeat;
+    position: relative;
+  }
+  #contact::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,30,60,0.88), rgba(10,50,25,0.82));
+  }
+  .contact-inner { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .contact-info { color: white; }
+  .contact-title { font-size: clamp(26px, 3.5vw, 42px); font-weight: 800; color: white; margin-bottom: 16px; }
+  .contact-title span { background: linear-gradient(135deg, #74b9ff, #55efc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .contact-desc { color: rgba(255,255,255,0.85); font-size: 15px; line-height: 1.75; margin-bottom: 32px; }
+  .contact-item { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 20px; }
+  .contact-item-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; color: #55efc4; flex-shrink: 0;
+  }
+  .contact-item-text .label { font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 1px; }
+  .contact-item-text .value { font-size: 14px; color: white; margin-top: 2px; line-height: 1.5; }
+  .contact-cta-btns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
+
+  .contact-form-glass { padding: 40px; }
+  .form-title { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; color: white; margin-bottom: 24px; }
+  .form-group { margin-bottom: 16px; }
+  .form-group label { display: block; font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 600; color: rgba(255,255,255,0.8); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%; padding: 12px 16px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 10px; color: white; font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    transition: all 0.3s; outline: none;
+  }
+  .form-group input::placeholder,
+  .form-group textarea::placeholder { color: rgba(255,255,255,0.4); }
+  .form-group select option { background: #1a3a6b; color: white; }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 0 0 3px rgba(116,185,255,0.2);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .btn-submit {
+    width: 100%; padding: 14px;
+    background: var(--gradient); color: white; border: none;
+    border-radius: 12px; font-family: 'Poppins', sans-serif;
+    font-size: 15px; font-weight: 700; cursor: pointer;
+    transition: all 0.3s; box-shadow: 0 6px 20px rgba(47,128,237,0.4);
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+  }
+  .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(47,128,237,0.5); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d1b2a; color: rgba(255,255,255,0.8);
+    padding: 60px 0 0;
+  }
+  .footer-grid {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 50px;
+    padding-bottom: 50px;
+  }
+  .footer-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+  .footer-logo-icon {
+    width: 46px; height: 46px; border-radius: 50%;
+    background: var(--gradient);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; color: white;
+  }
+  .footer-brand { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; color: white; line-height: 1.2; }
+  .footer-brand span { font-size: 11px; font-weight: 400; color: rgba(255,255,255,0.5); display: block; }
+  .footer-about { font-size: 13.5px; line-height: 1.75; color: rgba(255,255,255,0.6); margin-bottom: 20px; }
+  .footer-socials { display: flex; gap: 10px; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.7);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; text-decoration: none; transition: all 0.3s;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .social-btn:hover { background: var(--gradient); color: white; transform: translateY(-3px); }
+  .footer-title { font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 700; color: white; margin-bottom: 18px; position: relative; padding-bottom: 10px; }
+  .footer-title::after { content: ''; position: absolute; bottom: 0; left: 0; width: 30px; height: 2px; background: var(--gradient); border-radius: 2px; }
+  .footer-links { list-style: none; }
+  .footer-links li { margin-bottom: 10px; }
+  .footer-links a { font-size: 13.5px; color: rgba(255,255,255,0.6); text-decoration: none; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+  .footer-links a:hover { color: #74b9ff; }
+  .footer-links a i { font-size: 10px; color: var(--green); }
+  .footer-contact li { list-style: none; display: flex; gap: 10px; margin-bottom: 14px; font-size: 13.5px; color: rgba(255,255,255,0.6); line-height: 1.5; }
+  .footer-contact li i { color: var(--green); margin-top: 3px; flex-shrink: 0; width: 14px; }
+  .footer-wa-btn {
+    display: flex; align-items: center; gap: 10px;
+    background: #25D366; color: white; padding: 12px 18px;
+    border-radius: 12px; text-decoration: none; font-family: 'Poppins', sans-serif;
+    font-weight: 600; font-size: 13px; margin-top: 16px;
+    box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+    transition: all 0.3s;
+  }
+  .footer-wa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.45); background: #1ebe5d; }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 24px;
+    max-width: 1200px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 10px;
+    font-size: 12.5px; color: rgba(255,255,255,0.4);
+  }
+  .footer-bottom-full { max-width: 100%; border-top: 1px solid rgba(255,255,255,0.08); }
+
+  /* ── FLOATING BUTTONS ── */
+  .floating-whatsapp {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; text-decoration: none;
+    box-shadow: 0 6px 24px rgba(37,211,102,0.5);
+    transition: all 0.3s;
+    animation: pulse-green 2s infinite;
+  }
+  .floating-whatsapp:hover { transform: scale(1.1); background: #1ebe5d; }
+  @keyframes pulse-green {
+    0%, 100% { box-shadow: 0 6px 24px rgba(37,211,102,0.5); }
+    50% { box-shadow: 0 6px 40px rgba(37,211,102,0.7), 0 0 0 10px rgba(37,211,102,0.1); }
+  }
+
+  .floating-call {
+    position: fixed; bottom: 96px; right: 28px; z-index: 999;
+    width: 48px; height: 48px; border-radius: 50%;
+    background: var(--gradient); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; text-decoration: none;
+    box-shadow: 0 6px 20px rgba(47,128,237,0.4);
+    transition: all 0.3s;
+  }
+  .floating-call:hover { transform: scale(1.1); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  .fade-in-delay-1 { transition-delay: 0.1s; }
+  .fade-in-delay-2 { transition-delay: 0.2s; }
+  .fade-in-delay-3 { transition-delay: 0.3s; }
+  .fade-in-delay-4 { transition-delay: 0.4s; }
+
+  /* ── DIVIDER ── */
+  .gradient-divider { width: 70px; height: 4px; background: var(--gradient); border-radius: 2px; margin: 14px 0 20px; }
+  .text-center .gradient-divider { margin: 14px auto 20px; }
+
+  /* ── MOBILE ── */
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: block; }
+    .hero-container { grid-template-columns: 1fr; gap: 30px; }
+    .hero-right { display: none; }
+    .hero-glass { padding: 32px 26px; }
+    .weight-loss-grid, .pcos-grid, .contact-grid, .doctor-inner { grid-template-columns: 1fr; gap: 36px; }
+    .wl-stats { flex-direction: row; flex-wrap: wrap; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 36px; }
+    section { padding: 70px 0; }
+  }
+  @media (max-width: 600px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+    .hero-btns { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+    .form-row { grid-template-columns: 1fr; }
+    .doctor-stats { gap: 20px; }
+    .wl-points { grid-template-columns: 1fr; }
+    .contact-cta-btns { flex-direction: column; }
+    .contact-cta-btns .btn { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-container">
+    <a href="#home" class="nav-logo">
+      <div class="logo-icon"><i class="fas fa-leaf"></i></div>
+      <div class="logo-text">
+        <div class="clinic-name">Ayush Health Care</div>
+        <div class="clinic-sub">Ayurvedic Clinic</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#treatments">Treatments</a></li>
+      <li><a href="#weight-loss">Weight Loss</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#doctor">Doctor</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#contact" class="btn-book-nav">Book Appointment</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#home" onclick="closeMenu()">Home</a></li>
+    <li><a href="#treatments" onclick="closeMenu()">Treatments</a></li>
+    <li><a href="#weight-loss" onclick="closeMenu()">Weight Loss</a></li>
+    <li><a href="#results" onclick="closeMenu()">Results</a></li>
+    <li><a href="#doctor" onclick="closeMenu()">About Doctor</a></li>
+    <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+  </ul>
+  <a href="#contact" class="mobile-book-btn" onclick="closeMenu()"><i class="fas fa-calendar-check"></i> &nbsp;Book Appointment</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-container">
+    <div class="hero-glass glass-card fade-in">
+      <div class="hero-tag"><i class="fas fa-spa"></i> Traditional Ayurveda · Modern Science</div>
+      <h1 class="hero-title">Ayurvedic Healing<br>with <span>Modern Approach</span></h1>
+      <p class="hero-desc">Ayush Health Care Clinic provides natural Ayurvedic treatment for weight loss, PCOS, hair fall, skin problems, and lifestyle disorders. We focus on treating the root cause and helping patients achieve long-term health results.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book Consultation</a>
+        <a href="https://wa.me/917972511448" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+        <a href="tel:+917972511448" class="btn btn-call"><i class="fas fa-phone"></i> Call Now</a>
+      </div>
+      <div class="hero-points">
+        <div class="hero-point"><i class="fas fa-check-circle"></i> Natural Treatment</div>
+        <div class="hero-point"><i class="fas fa-check-circle"></i> No Side Effects</div>
+        <div class="hero-point"><i class="fas fa-check-circle"></i> Personal Consultation</div>
+        <div class="hero-point"><i class="fas fa-check-circle"></i> Online & Offline</div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card glass-card fade-in fade-in-delay-1">
+        <div class="stat-icon"><i class="fas fa-users"></i></div>
+        <div>
+          <div class="stat-num">1000+</div>
+          <div class="stat-label">Happy Patients</div>
+        </div>
+      </div>
+      <div class="stat-card glass-card fade-in fade-in-delay-2">
+        <div class="stat-icon"><i class="fas fa-weight"></i></div>
+        <div>
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Weight Loss Cases</div>
+        </div>
+      </div>
+      <div class="stat-card glass-card fade-in fade-in-delay-3">
+        <div class="stat-icon"><i class="fas fa-star"></i></div>
+        <div>
+          <div class="stat-num">10+ Yrs</div>
+          <div class="stat-label">Clinical Experience</div>
+        </div>
+      </div>
+      <div class="stat-card glass-card fade-in fade-in-delay-4">
+        <div class="stat-icon"><i class="fas fa-video"></i></div>
+        <div>
+          <div class="stat-num">Pan India</div>
+          <div class="stat-label">Online Consultation Available</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TREATMENTS -->
+<section id="treatments">
+  <div class="section-container">
+    <div class="text-center fade-in">
+      <div class="section-badge"><i class="fas fa-leaf"></i> Our Specializations</div>
+      <h2 class="section-title">Treatments We <span>Offer</span></h2>
+      <div class="gradient-divider"></div>
+      <p class="section-subtitle">Comprehensive Ayurvedic care for a wide range of health conditions with natural, safe and effective treatments.</p>
+    </div>
+    <div class="treatments-grid">
+      <div class="treatment-card fade-in">
+        <div class="treatment-icon"><i class="fas fa-weight" style="color:#2F80ED"></i></div>
+        <div class="treatment-name">Weight Loss</div>
+        <div class="treatment-desc">Natural Ayurvedic approach to reduce fat and improve metabolism without side effects.</div>
+      </div>
+      <div class="treatment-card fade-in fade-in-delay-1">
+        <div class="treatment-icon"><i class="fas fa-venus" style="color:#e84393"></i></div>
+        <div class="treatment-name">PCOS / PCOD</div>
+        <div class="treatment-desc">Hormonal balance and menstrual health with herbal Ayurvedic treatment.</div>
+      </div>
+      <div class="treatment-card fade-in fade-in-delay-2">
+        <div class="treatment-icon"><i class="fas fa-cut" style="color:#6c5ce7"></i></div>
+        <div class="treatment-name">Hair Fall</div>
+        <div class="treatment-desc">Root cause treatment for hair loss, thinning, and scalp health problems.</div>
+      </div>
+      <div class="treatment-card fade-in fade-in-delay-3">
+        <div class="treatment-icon"><i class="fas fa-spa" style="color:#fd79a8"></i></div>
+        <div class="treatment-name">Skin Problems</div>
+        <div class="treatment-desc">Ayurvedic solutions for acne, eczema, psoriasis, and skin disorders.</div>
+      </div>
+      <div class="treatment-card fade-in">
+        <div class="treatment-icon"><i class="fas fa-bone" style="color:#f39c12"></i></div>
+        <div class="treatment-name">Joint Pain</div>
+        <div class="treatment-desc">Relief from arthritis, joint stiffness, and musculoskeletal disorders.</div>
+      </div>
+      <div class="treatment-card fade-in fade-in-delay-1">
+        <div class="treatment-icon"><i class="fas fa-stomach" style="color:#27AE60"></i></div>
+        <div class="treatment-name">Digestive Problems</div>
+        <div class="treatment-desc">Improve digestion, gut health, and treat IBS with natural remedies.</div>
+      </div>
+      <div class="treatment-card fade-in fade-in-delay-2">
+        <div class="treatment-icon"><i class="fas fa-fire" style="color:#e17055"></i></div>
+        <div class="treatment-name">Acidity & Gas</div>
+        <div class="treatment-desc">Natural treatment for acid reflux, bloating, and gastric issues.</div>
+      </div>
+      <div class="treatment-card fade-in fade-in-delay-3">
+        <div class="treatment-icon"><i class="fas fa-tint" style="color:#e74c3c"></i></div>
+        <div class="treatment-name">Diabetes</div>
+        <div class="treatment-desc">Manage blood sugar levels naturally with Ayurvedic protocols.</div>
+      </div>
+      <div class="treatment-card fade-in">
+        <div class="treatment-icon"><i class="fas fa-heart" style="color:#e84393"></i></div>
+        <div class="treatment-name">Female Health</div>
+        <div class="treatment-desc">Menstrual disorders, fertility support, and women's wellness care.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WEIGHT LOSS PROGRAM -->
+<section id="weight-loss">
+  <div class="weight-loss-inner">
+    <div style="padding: 90px 0;">
+      <div class="weight-loss-grid">
+        <div class="weight-loss-glass glass-card fade-in">
+          <div class="hero-tag"><i class="fas fa-fire-alt"></i> Signature Program</div>
+          <h2 class="wl-title">Ayush <span>Weight Loss</span> Program</h2>
+          <p class="wl-desc">Lose weight naturally with Ayurvedic treatment. Our program helps reduce fat, improve metabolism, and maintain long-term results without heavy exercise or strict dieting.</p>
+          <div class="wl-points">
+            <div class="wl-point"><i class="fas fa-check-circle"></i> No Heavy Exercise</div>
+            <div class="wl-point"><i class="fas fa-check-circle"></i> No Strict Diet</div>
+            <div class="wl-point"><i class="fas fa-check-circle"></i> Ayurvedic Medicine</div>
+            <div class="wl-point"><i class="fas fa-check-circle"></i> Fat & Inch Loss</div>
+            <div class="wl-point"><i class="fas fa-check-circle"></i> Safe & Natural</div>
+            <div class="wl-point"><i class="fas fa-check-circle"></i> Personal Diet Guide</div>
+          </div>
+          <a href="#contact" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book Weight Loss Consultation</a>
+        </div>
+        <div class="wl-stats fade-in fade-in-delay-2">
+          <div class="wl-stat-item glass-card">
+            <div class="wl-stat-circle"><span class="num">12</span><span class="unit">kg</span></div>
+            <div class="wl-stat-body">
+              <div class="wl-stat-title">Ramila Patel, Rajkot</div>
+              <div class="wl-stat-sub">Lost 12 kg in 3 months with Ayurvedic treatment</div>
+            </div>
+          </div>
+          <div class="wl-stat-item glass-card">
+            <div class="wl-stat-circle"><span class="num">24</span><span class="unit">kg</span></div>
+            <div class="wl-stat-body">
+              <div class="wl-stat-title">Sonal Mehta, Ahmedabad</div>
+              <div class="wl-stat-sub">Reduced 24 kg in 6 months, no gym required</div>
+            </div>
+          </div>
+          <div class="wl-stat-item glass-card">
+            <div class="wl-stat-circle"><span class="num">18</span><span class="unit">kg</span></div>
+            <div class="wl-stat-body">
+              <div class="wl-stat-title">Bhavna Shah, Surat</div>
+              <div class="wl-stat-sub">18 kg weight loss with personal diet guidance</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="section-container">
+    <div class="text-center fade-in">
+      <div class="section-badge"><i class="fas fa-trophy"></i> Proven Results</div>
+      <h2 class="section-title">Real Patient <span>Results</span></h2>
+      <div class="gradient-divider"></div>
+      <p class="section-subtitle">Real results from real patients. Our Ayurvedic treatment has helped hundreds achieve their health goals.</p>
+    </div>
+    <div class="results-grid">
+      <div class="result-card fade-in">
+        <div class="result-images">
+          <div class="result-img">👩‍🦱<div class="result-label">BEFORE</div></div>
+          <div class="result-img" style="background: linear-gradient(135deg, #d4edda, #b8ddc5);">👩<div class="result-label">AFTER</div></div>
+        </div>
+        <div class="result-body">
+          <div class="result-kg">-12 kg</div>
+          <div class="result-text">Priya Sharma · Weight Loss · 3 Months</div>
+          <div class="result-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="result-card fade-in fade-in-delay-1">
+        <div class="result-images">
+          <div class="result-img">🧕<div class="result-label">BEFORE</div></div>
+          <div class="result-img" style="background: linear-gradient(135deg, #d4edda, #b8ddc5);">👩<div class="result-label">AFTER</div></div>
+        </div>
+        <div class="result-body">
+          <div class="result-kg">-24 kg</div>
+          <div class="result-text">Meena Patel · Weight Loss · 6 Months</div>
+          <div class="result-stars">★★★★★</div>
+        </div>
+      </div>
+      <div class="result-card fade-in fade-in-delay-2">
+        <div class="result-images">
+          <div class="result-img">👨‍🦱<div class="result-label">BEFORE</div></div>
+          <div class="result-img" style="background: linear-gradient(135deg, #d4edda, #b8ddc5);">👨<div class="result-label">AFTER</div></div>
+        </div>
+        <div class="result-body">
+          <div class="result-kg">-15 kg</div>
+          <div class="result-text">Rajesh Joshi · Weight Loss · 4 Months</div>
+          <div class="result-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top: 40px;">
+      <p style="color: var(--text-light); font-size: 14px; margin-bottom: 20px; font-style: italic;">*Results may vary. Individual results depend on body type, consistency, and treatment duration.</p>
+      <a href="https://wa.me/917972511448" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Ask About Your Case on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- HAIR / PCOS -->
+<section id="pcos-hair">
+  <div class="pcos-inner">
+    <div style="padding: 90px 0;">
+      <div class="pcos-grid">
+        <div class="pcos-glass glass-card fade-in">
+          <div class="hero-tag" style="background: rgba(162,155,254,0.2); border-color: rgba(162,155,254,0.3); color: #a29bfe;"><i class="fas fa-venus"></i> Women's Health</div>
+          <h2 class="pcos-title"><span>PCOS / PCOD</span> Treatment</h2>
+          <p class="pcos-desc">Polycystic Ovary Syndrome affects millions of women. Our Ayurvedic approach balances hormones naturally, regulates menstrual cycles, and reduces PCOS symptoms effectively.</p>
+          <ul class="pcos-list">
+            <li><i class="fas fa-check-circle"></i> Hormonal imbalance correction</li>
+            <li><i class="fas fa-check-circle"></i> Regular menstrual cycle</li>
+            <li><i class="fas fa-check-circle"></i> Weight management for PCOS</li>
+            <li><i class="fas fa-check-circle"></i> Skin & acne relief from PCOS</li>
+            <li><i class="fas fa-check-circle"></i> Fertility improvement</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary" style="margin-right:10px;"><i class="fas fa-calendar-check"></i> Book Consultation</a>
+        </div>
+        <div class="pcos-glass glass-card fade-in fade-in-delay-2">
+          <div class="hero-tag" style="background: rgba(162,155,254,0.2); border-color: rgba(162,155,254,0.3); color: #a29bfe;"><i class="fas fa-cut"></i> Hair Care</div>
+          <h2 class="pcos-title"><span>Hair Fall</span> Treatment</h2>
+          <p class="pcos-desc">Hair fall can be caused by stress, hormonal issues, nutritional deficiencies, or scalp problems. Our Ayurvedic treatment identifies the root cause and provides personalized care.</p>
+          <ul class="pcos-list">
+            <li><i class="fas fa-check-circle"></i> Root cause diagnosis</li>
+            <li><i class="fas fa-check-circle"></i> Scalp nourishment therapy</li>
+            <li><i class="fas fa-check-circle"></i> Herbal hair growth treatment</li>
+            <li><i class="fas fa-check-circle"></i> Hair thinning reversal</li>
+            <li><i class="fas fa-check-circle"></i> Dandruff & scalp issues</li>
+          </ul>
+          <a href="#contact" class="btn btn-primary"><i class="fas fa-calendar-check"></i> Book Consultation</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="why-us">
+  <div class="section-container">
+    <div class="text-center fade-in">
+      <div class="section-badge"><i class="fas fa-shield-alt"></i> Why Choose Us</div>
+      <h2 class="section-title">Why Patients <span>Trust Us</span></h2>
+      <div class="gradient-divider"></div>
+      <p class="section-subtitle">We combine traditional Ayurvedic wisdom with modern clinical approach to deliver lasting health results.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card fade-in">
+        <div class="why-icon"><i class="fas fa-user-md" style="color:#2F80ED"></i></div>
+        <div class="why-title">Experienced Doctor</div>
+        <div class="why-desc">MD qualified Ayurvedic doctor with 10+ years of clinical practice.</div>
+      </div>
+      <div class="why-card fade-in fade-in-delay-1">
+        <div class="why-icon"><i class="fas fa-leaf" style="color:#27AE60"></i></div>
+        <div class="why-title">Natural Treatment</div>
+        <div class="why-desc">100% natural herbal medicines with no harmful chemicals.</div>
+      </div>
+      <div class="why-card fade-in fade-in-delay-2">
+        <div class="why-icon"><i class="fas fa-heart" style="color:#e84393"></i></div>
+        <div class="why-title">Personal Attention</div>
+        <div class="why-desc">Every patient gets individual care plan based on their body type.</div>
+      </div>
+      <div class="why-card fade-in fade-in-delay-3">
+        <div class="why-icon"><i class="fas fa-rupee-sign" style="color:#f39c12"></i></div>
+        <div class="why-title">Affordable Fees</div>
+        <div class="why-desc">Quality healthcare at very reasonable and affordable prices.</div>
+      </div>
+      <div class="why-card fade-in">
+        <div class="why-icon"><i class="fas fa-video" style="color:#6c5ce7"></i></div>
+        <div class="why-title">Online Consultation</div>
+        <div class="why-desc">Video and WhatsApp consultations available for patients across India.</div>
+      </div>
+      <div class="why-card fade-in fade-in-delay-1">
+        <div class="why-icon"><i class="fas fa-users" style="color:#2F80ED"></i></div>
+        <div class="why-title">1000+ Patients</div>
+        <div class="why-desc">Successfully treated over 1000 happy patients across Gujarat.</div>
+      </div>
+      <div class="why-card fade-in fade-in-delay-2">
+        <div class="why-icon"><i class="fas fa-search" style="color:#27AE60"></i></div>
+        <div class="why-title">Root Cause Treatment</div>
+        <div class="why-desc">We treat the root cause, not just symptoms, for lasting results.</div>
+      </div>
+      <div class="why-card fade-in fade-in-delay-3">
+        <div class="why-icon"><i class="fas fa-shield-alt" style="color:#e17055"></i></div>
+        <div class="why-title">No Side Effects</div>
+        <div class="why-desc">Ayurvedic medicines are safe with zero side effects for all ages.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTOR -->
+<section id="doctor">
+  <div class="section-container">
+    <div class="doctor-inner">
+      <div class="fade-in">
+        <div class="doctor-photo-bg">
+          👨‍⚕️
+          <div class="doctor-badge">
+            <div class="badge-num">10+</div>
+            <div class="badge-text">Years Exp.</div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in fade-in-delay-2">
+        <div class="section-badge"><i class="fas fa-user-md"></i> Meet Your Doctor</div>
+        <h2 class="doctor-name">Dr. Jaimin M. Baldania</h2>
+        <div class="doctor-title">Ayurvedic Physician & Specialist</div>
+        <div class="doctor-quals">
+          <span class="qual-tag">MD (AM)</span>
+          <span class="qual-tag">B.A.M.S</span>
+          <span class="qual-tag">CCH (Pediatric)</span>
+          <span class="qual-tag">CGO (Gynaec)</span>
+          <span class="qual-tag">CSVD (Skin & VD)</span>
+        </div>
+        <p class="doctor-desc">Dr. Jaimin M. Baldania is a highly qualified Ayurvedic physician with specializations in Gynaecology, Pediatrics, and Skin & Venereal Diseases. With over 10 years of clinical experience, he has successfully treated more than 1000 patients for weight loss, PCOS, hair fall, and various lifestyle disorders. Dr. Baldania's approach combines traditional Ayurvedic principles with modern diagnostic methods to provide effective, personalized care for each patient.</p>
+        <div class="doctor-stats">
+          <div class="dstat">
+            <div class="dstat-num">1000+</div>
+            <div class="dstat-label">Patients Treated</div>
+          </div>
+          <div class="dstat">
+            <div class="dstat-num">10+</div>
+            <div class="dstat-label">Years Experience</div>
+          </div>
+          <div class="dstat">
+            <div class="dstat-num">5</div>
+            <div class="dstat-label">Specializations</div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="tel:+917972511448" class="btn btn-primary"><i class="fas fa-phone"></i> Call Doctor</a>
+          <a href="https://wa.me/917972511448" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-container">
+    <div class="text-center fade-in">
+      <div class="section-badge"><i class="fas fa-star"></i> Patient Reviews</div>
+      <h2 class="section-title">What Patients <span>Say</span></h2>
+      <div class="gradient-divider"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card fade-in">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I lost 12 kg in just 3 months without any gym or heavy dieting. Dr. Baldania's treatment is truly amazing. I feel so much more confident and healthy now. Highly recommend!</p>
+        <div class="testi-author">
+          <div class="testi-avatar">P</div>
+          <div>
+            <div class="testi-name">Priya Sharma</div>
+            <div class="testi-location">Rajkot, Gujarat</div>
+            <span class="testi-result">Lost 12 kg</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I had PCOS for 5 years and tried many treatments. After 4 months of Ayurvedic treatment at Ayush Clinic, my cycle became regular and my skin improved so much. Thank you Doctor!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #e84393, #6c5ce7);">M</div>
+          <div>
+            <div class="testi-name">Monika Patel</div>
+            <div class="testi-location">Morbi, Gujarat</div>
+            <span class="testi-result">PCOS Treated</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">My hair fall was so severe, I was very stressed. After the treatment here, my hair fall has reduced 80% and I can see new growth. Online consultation was also very convenient!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #6c5ce7, #a29bfe);">R</div>
+          <div>
+            <div class="testi-name">Renu Joshi</div>
+            <div class="testi-location">Ahmedabad, Gujarat</div>
+            <span class="testi-result">Hair Fall Stopped</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">24 kg weight loss in 6 months! I had tried so many things before. This was my last hope and it worked. Dr. Baldania gave me a proper diet plan and Ayurvedic medicines. Life changing!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #27AE60, #2F80ED);">S</div>
+          <div>
+            <div class="testi-name">Sonal Mehta</div>
+            <div class="testi-location">Surat, Gujarat</div>
+            <span class="testi-result">Lost 24 kg</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">My skin acne problem was treated beautifully with Ayurvedic treatment. No harsh chemicals, no side effects. My skin is clear and glowing now. Very professional and caring doctor.</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #fd79a8, #e84393);">N</div>
+          <div>
+            <div class="testi-name">Nisha Verma</div>
+            <div class="testi-location">Rajkot, Gujarat</div>
+            <span class="testi-result">Skin Cleared</span>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card fade-in fade-in-delay-2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">I consulted online from Mumbai. Dr. Baldania diagnosed my issue perfectly and sent medicines. My acidity and digestive issues are 90% better in 2 months. Excellent online service!</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background: linear-gradient(135deg, #f39c12, #e17055);">K</div>
+          <div>
+            <div class="testi-name">Kiran Shah</div>
+            <div class="testi-location">Mumbai, Maharashtra</div>
+            <span class="testi-result">Acidity Cured</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div style="padding: 90px 0;">
+      <div class="contact-grid">
+        <div class="contact-info fade-in">
+          <div class="section-badge" style="background: rgba(255,255,255,0.15); border-color: rgba(255,255,255,0.25); color: white;"><i class="fas fa-map-marker-alt"></i> Visit Us</div>
+          <h2 class="contact-title">Book Your <span>Appointment</span> Today</h2>
+          <p class="contact-desc">Take the first step toward better health. Book your consultation today and experience the power of Ayurvedic healing.</p>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-item-text">
+              <div class="label">Clinic Address</div>
+              <div class="value">Shop No 8, Ashirwad Square<br>Satellite Chowk, Morbi Road<br>Rajkot, Gujarat 360002</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-phone"></i></div>
+            <div class="contact-item-text">
+              <div class="label">Phone / WhatsApp</div>
+              <div class="value">+91 79725 11448</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-clock"></i></div>
+            <div class="contact-item-text">
+              <div class="label">Clinic Hours</div>
+              <div class="value">Mon–Sat: 9:00 AM – 8:00 PM<br>Sunday: By Appointment</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon"><i class="fas fa-video"></i></div>
+            <div class="contact-item-text">
+              <div class="label">Online Consultation</div>
+              <div class="value">Available Pan India via Video Call & WhatsApp</div>
+            </div>
+          </div>
+          <div class="contact-cta-btns">
+            <a href="https://wa.me/917972511448" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> Chat on WhatsApp</a>
+            <a href="tel:+917972511448" class="btn btn-call"><i class="fas fa-phone"></i> Call Now</a>
+          </div>
+        </div>
+        <div class="contact-form-glass glass-card fade-in fade-in-delay-2">
+          <div class="form-title"><i class="fas fa-calendar-check" style="margin-right:8px;"></i>Book Free Consultation</div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" placeholder="Full Name">
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <input type="tel" placeholder="+91 00000 00000">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Your Problem / Concern</label>
+            <select>
+              <option value="">Select Your Problem</option>
+              <option>Weight Loss</option>
+              <option>PCOS / PCOD</option>
+              <option>Hair Fall</option>
+              <option>Skin Problems</option>
+              <option>Joint Pain</option>
+              <option>Digestive Issues</option>
+              <option>Acidity & Gas</option>
+              <option>Diabetes</option>
+              <option>Female Health</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Your City</label>
+            <input type="text" placeholder="City, State">
+          </div>
+          <div class="form-group">
+            <label>Message (Optional)</label>
+            <textarea rows="3" placeholder="Brief description of your health concern..."></textarea>
+          </div>
+          <button class="btn-submit" onclick="submitForm()">
+            <i class="fas fa-paper-plane"></i> Book Appointment
+          </button>
+          <p style="text-align:center; color: rgba(255,255,255,0.6); font-size: 12px; margin-top: 14px;"><i class="fas fa-lock" style="margin-right:4px;"></i> Your information is 100% private and secure</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon"><i class="fas fa-leaf"></i></div>
+        <div>
+          <div class="footer-brand">Ayush Health Care Clinic<span>Ayurvedic Treatment Specialist</span></div>
+        </div>
+      </div>
+      <p class="footer-about">Natural Ayurvedic treatments for weight loss, PCOS, hair fall, skin problems and lifestyle disorders. Combining traditional wisdom with modern approach for lasting results.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-instagram"></i></a>
+        <a href="https://wa.me/917972511448" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i></a>
+        <a href="#" class="social-btn"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-title">Treatments</div>
+      <ul class="footer-links">
+        <li><a href="#treatments"><i class="fas fa-chevron-right"></i> Weight Loss</a></li>
+        <li><a href="#treatments"><i class="fas fa-chevron-right"></i> PCOS / PCOD</a></li>
+        <li><a href="#treatments"><i class="fas fa-chevron-right"></i> Hair Fall</a></li>
+        <li><a href="#treatments"><i class="fas fa-chevron-right"></i> Skin Problems</a></li>
+        <li><a href="#treatments"><i class="fas fa-chevron-right"></i> Joint Pain</a></li>
+        <li><a href="#treatments"><i class="fas fa-chevron-right"></i> Diabetes</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-title">Quick Links</div>
+      <ul class="footer-links">
+        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+        <li><a href="#results"><i class="fas fa-chevron-right"></i> Results</a></li>
+        <li><a href="#doctor"><i class="fas fa-chevron-right"></i> About Doctor</a></li>
+        <li><a href="#testimonials"><i class="fas fa-chevron-right"></i> Testimonials</a></li>
+        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
+        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Book Appointment</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-title">Contact Info</div>
+      <ul class="footer-contact">
+        <li><i class="fas fa-map-marker-alt"></i> Shop No 8, Ashirwad Square, Satellite Chowk, Morbi Road, Rajkot – 360002</li>
+        <li><i class="fas fa-phone"></i> +91 79725 11448</li>
+        <li><i class="fas fa-clock"></i> Mon–Sat: 9:00 AM – 8:00 PM</li>
+        <li><i class="fas fa-video"></i> Online Consultation Available</li>
+      </ul>
+      <a href="https://wa.me/917972511448" target="_blank" class="footer-wa-btn">
+        <i class="fab fa-whatsapp" style="font-size:18px;"></i>
+        Chat on WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom-full">
+    <div class="footer-bottom">
+      <div>© 2025 Ayush Health Care Clinic. All rights reserved.</div>
+      <div>Rajkot, Gujarat · Ayurvedic Treatment Specialist</div>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<a href="https://wa.me/917972511448" target="_blank" class="floating-whatsapp" title="Chat on WhatsApp">
+  <i class="fab fa-whatsapp"></i>
+</a>
+<a href="tel:+917972511448" class="floating-call" title="Call Now">
+  <i class="fas fa-phone"></i>
+</a>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 50) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Hamburger menu
+  function toggleMenu() {
+    const ham = document.getElementById('hamburger');
+    const menu = document.getElementById('mobileMenu');
+    ham.classList.toggle('active');
+    menu.classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('hamburger').classList.remove('active');
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Form submit
+  function submitForm() {
+    const name = document.querySelector('input[placeholder="Full Name"]').value;
+    const phone = document.querySelector('input[type="tel"]').value;
+    if (!name || !phone) {
+      alert('Please fill in your name and phone number.');
+      return;
+    }
+    const msg = `Hello Dr. Baldania! I would like to book a consultation.\n\nName: ${name}\nPhone: ${phone}`;
+    window.open(`https://wa.me/917972511448?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+
+  // Active nav link highlight on scroll
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY + 120;
+    sections.forEach(sec => {
+      const top = sec.offsetTop;
+      const height = sec.offsetHeight;
+      const id = sec.getAttribute('id');
+      const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+      if (link) {
+        if (scrollY >= top && scrollY < top + height) {
+          document.querySelectorAll('.nav-links a').forEach(a => a.style.color = '');
+          link.style.color = '#2F80ED';
+        }
+      }
+    });
+  });
+</script>
+</body>
+</html>
+</body>
+</html>
